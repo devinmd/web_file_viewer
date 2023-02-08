@@ -6,8 +6,21 @@
 ### to-do
 - frontend
 	- view/preview files
-	- better file icon design
+	- finalize file icon design
+		- same icon for all images file types?
+		- same icon for all video file types?
+		- same icon for all audio file types?
 		- finish all file icons
-- backend
+		- finished:
+			- js
+			- html
+			- css
+			- txt
+			- json
+			- bat
+			- jar
+			- md
+			- backend
+### finished file icons
 
 #
