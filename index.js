@@ -41,6 +41,7 @@ io.on("connection", (socket) => {
     //
     console.log("user requested folder: " + requested_path);
     requested_path = requested_path.replaceAll(homedir, "");
+
     try {
       // array of file names
       files = fs.readdirSync(path.join(homedir, requested_path));
@@ -65,11 +66,19 @@ io.on("connection", (socket) => {
           // size in bytes
           size: stats.size,
           // folder or file
-          type: stats.isDirectory() ? "folder" : stats.isFile() ? "file" : "other", 
+          type: stats.isDirectory() ? "folder" : stats.isFile() ? "file" : "other",
           // HOW TO PREVIEW/SHOW THE FILE: folder, audio, video, image, text, none
-          view_type: stats.isDirectory() ? "folder" : Object.keys(file_extensions).includes(path.extname(filepath).replace(".", "")) ? file_extensions[path.extname(filepath).replace(".", "")].view_type : 'none',
+          view_type: stats.isDirectory()
+            ? "folder"
+            : Object.keys(file_extensions).includes(path.extname(filepath).replace(".", ""))
+            ? file_extensions[path.extname(filepath).replace(".", "")].view_type
+            : "none",
           // ICON TO USE
-          icon: stats.isDirectory() ? "folder.svg" : Object.keys(file_extensions).includes(path.extname(filepath).replace(".", "")) ? file_extensions[path.extname(filepath).replace(".", "")].icon : 'file.svg',
+          icon: stats.isDirectory()
+            ? "folder.svg"
+            : Object.keys(file_extensions).includes(path.extname(filepath).replace(".", ""))
+            ? file_extensions[path.extname(filepath).replace(".", "")].icon
+            : "file.svg",
         };
         console.log(fileobj);
         fileobjects.push(fileobj);
@@ -77,6 +86,8 @@ io.on("connection", (socket) => {
 
       socket.emit("files", fileobjects);
       socket.emit("current_path", path.join(homedir, requested_path));
+      console.log(path.join(homedir, requested_path));
+      app.use(express.static(path.join(homedir, requested_path)));
     } catch (err) {
       console.log(err);
       socket.emit("files", "error");
@@ -85,4 +96,7 @@ io.on("connection", (socket) => {
 });
 
 // set public
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(express.static('C:/Users/devin/Documents/ShareX/Screenshots/2023-02'));
+

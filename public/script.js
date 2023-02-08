@@ -17,9 +17,9 @@ socket.on("files", (filelist) => {
 
     if (!file.name.startsWith(".")) {
       let container = document.createElement("button");
-      container.innerHTML = filelist[i].type + " -- " + filelist[i].name;
-      console.log(filelist[i])
-      container.style.backgroundImage = 'url(./assets/fileicons/' + filelist[i].icon +')'
+      container.innerHTML = filelist[i].name;
+      console.log(filelist[i]);
+      container.style.backgroundImage = "url(./assets/fileicons/" + filelist[i].icon + ")";
 
       if (file.type == "folder") {
         container.onclick = function () {
@@ -27,6 +27,13 @@ socket.on("files", (filelist) => {
         };
       } else if (file.type == "file") {
         //
+        if(file.view_type == 'image'){
+          let imageIcon = document.createElement('img')
+          imageIcon.src = file.path + '/' + file.name
+      document.querySelector("#files").append(imageIcon);
+
+        }
+
       }
 
       document.querySelector("#files").append(container);
@@ -35,7 +42,7 @@ socket.on("files", (filelist) => {
 });
 
 function init() {
-  getFolder('Documents/programming/html');
+  getFolder("");
 }
 
 function getFolder(folder = "") {
