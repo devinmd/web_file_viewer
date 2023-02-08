@@ -1,0 +1,47 @@
+html,
+* {
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+
+  -webkit-font-smoothing: antialiased;
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-repeat: no-repeat;
+  outline: none;
+
+}
+
+body {
+  font-family: Helvetica;
+}
+
+#content {
+  padding: 64px;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+
+#path {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+button {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 12px;
+  border: 1px solid black;
+
+  background-size: auto 90%;
+  padding: 1px 0 1px 24px;
+  background-position: 1px center;
+
+}
+button:hover{
+  border: 1px solid white;
+}
