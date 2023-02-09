@@ -10,15 +10,10 @@
   - same icon for all images file types?
   - same icon for all video file types?
   - same icon for all audio file types?
-  - finish all file icons
-  - finished: js, html, css, txt, json, bat, jar, md
-- hide & show dot files
 - option to show image/video previews OR just show a basic icon
-- back & forward buttons
+- file details (size, dates, etc.)
 
 ### backend
-
-- add filetypes: jsonc
 
 ### both
 
@@ -26,4 +21,15 @@
   - give info about the users
 - show info about the host computer
 - download, delete, move, rename files
+- sort files/folders
+- option to show folders first
 - edit text files ???
+- file previews
+  - text
+    - line count, character count
+
+### file previews
+
+- somehow make files public
+- blob/uri/base64 string
+- temporary copy of files

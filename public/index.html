@@ -15,10 +15,16 @@
 
 	<div id="app">
 		<div id="content">
+			<div id="options">
+				<button onclick="home()">Home</button>
+				<button onclick="back()">Back</button>
+				<button onclick="toggleDotfiles(this)">Show Dotfiles</button>
+			</div>
+			<p id="hostname"></p>
 			<p id="path"></p>
 			<div id="files"></div>
 		</div>
-	
+
 	</div>
 
 	<script src="/socket.io/socket.io.js"></script>

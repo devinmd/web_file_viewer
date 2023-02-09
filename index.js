@@ -13,6 +13,7 @@ const path = require("path");
 
 // const vars
 const homedir = os.homedir();
+const hostname = os.hostname()
 const port = 8008;
 
 // read file extensions
@@ -31,6 +32,7 @@ server.listen(port, () => {
 io.on("connection", (socket) => {
   // connectoin
   console.log(`(${socket.id}) connected`);
+  socket.emit('hostname', hostname)
 
   //  disconnect
   socket.on("disconnect", () => {
@@ -80,6 +82,11 @@ io.on("connection", (socket) => {
             ? file_extensions[path.extname(filepath).replace(".", "")].icon
             : "file.svg",
         };
+
+        if(fileobj.view_type == 'text'){
+          fileobj.text = fs.readFileSync(filepath).toString()
+        }
+
         console.log(fileobj);
         fileobjects.push(fileobj);
       });
@@ -97,6 +104,3 @@ io.on("connection", (socket) => {
 
 // set public
 app.use(express.static(path.join(__dirname, "public")));
-
-app.use(express.static('C:/Users/devin/Documents/ShareX/Screenshots/2023-02'));
-
