@@ -18,6 +18,8 @@
   "mjs": { "description": "EcmaScript Module", "icon": "mjs.svg", "view_type": "text" },
   "jsonc": { "description": "JSONC File", "icon": "jsonc.svg", "view_type": "text" },
 
+  "ini": { "description": "INI File", "icon": "ini.svg", "view_type": "text" },
+
   "dll": { "description": "DLL File", "icon": "dll.svg", "view_type": "text" },
 
   "csv": { "description": "CSV File", "icon": "csv.svg", "view_type": "text" },
@@ -38,7 +40,7 @@
   "jar": { "description": "Java Archive", "icon": "jar.svg", "view_type": "none" },
   "msi": { "description": "Windows Installer", "icon": "msi.svg", "view_type": "none" },
 
-  "otf": { "description": "Open type Font File", "icon": "otf.svg", "view_type": "none" },
+  "otf": { "description": "Open Type Font File", "icon": "otf.svg", "view_type": "none" },
   "ttf": { "description": "Truetype Font File", "icon": "ttf.svg", "view_type": "none" },
   "fnt": { "description": "Windows Font File", "icon": "fnt.svg", "view_type": "none" },
   "fon": { "description": "Font File", "icon": "fon.svg", "view_type": "none" },

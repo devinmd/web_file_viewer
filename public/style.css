@@ -2,7 +2,6 @@ html,
 * {
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
-
   -webkit-font-smoothing: antialiased;
   background-color: black;
   color: white;
@@ -31,13 +30,14 @@ body {
 
 #files button {
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 8px;
   font-size: 12px;
   border: 1px solid black;
   background-size: auto 90%;
   padding: 1px 0 1px 24px;
   background-position: 1px center;
 }
+
 #files button:hover {
   border: 1px solid white;
 }
@@ -55,6 +55,7 @@ body {
   flex-direction: row;
   gap: 16px;
 }
+
 #options button {
   border: 1px solid black;
 }
