@@ -10,56 +10,100 @@ html,
   border: none;
   background-repeat: no-repeat;
   outline: none;
-}
-
-body {
   font-family: Helvetica;
 }
 
+button {
+  border: 1px solid black;
+  padding: 2px 4px;
+  font-size: 14px;
+}
+
+#list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#list tr:not(:first-child):hover {
+  outline: 1px solid white;
+}
+
+#list tr td {
+  white-space: nowrap;
+  cursor: default;
+}
+
+#list tr td.icon-container {
+  width: 24px;
+}
+
+#list tr td .icon {
+  height: 16px;
+  width: auto;
+}
+
+#list tr td.btime {
+  color: #8f8f8f;
+  padding-right: 32px;
+}
+
+#list tr th {
+  text-align: left;
+}
+
+#list tr td.size {
+  color: #8f8f8f;
+  text-align: right;
+  
+}
+
 #content {
-  padding: 64px;
   display: flex;
   gap: 16px;
   flex-direction: column;
+  align-items: start;
+}
+#content {
+  padding: 64px;
+}
+#current {
+  font-size: 24px;
 }
 
-#path {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-#files button {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 12px;
-  border: 1px solid black;
-  background-size: auto 90%;
-  padding: 1px 0 1px 24px;
-  background-position: 1px center;
-}
-
-#files button:hover {
+button:hover {
   border: 1px solid white;
 }
 
-#files button.dotfile {
-  color: gray;
-}
-
-#files plaintext {
-  margin-bottom: 12px;
+img,
+video {
+  object-fit: contain;
 }
 
 #options {
   display: flex;
   flex-direction: row;
+}
+
+#hostname {
+  font-size: 14px;
+}
+
+#path {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#info {
+  display: flex;
+  font-size: 14px;
   gap: 16px;
+  flex-direction: row;
+  align-items: center;
 }
 
-#options button {
-  border: 1px solid black;
-}
-
-#options button:hover {
-  border: 1px solid white;
+#loading {
+  display: none;
+  text-align: center;
+  font-size: 14px;
+  width: 100%;
 }

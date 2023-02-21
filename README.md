@@ -28,8 +28,3 @@
   - text
     - line count, character count
 
-### file previews
-
-- somehow make files public
-- blob/uri/base64 string
-- temporary copy of files

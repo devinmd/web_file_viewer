@@ -13,11 +13,8 @@ const path = require("path");
 
 // const vars
 const homedir = os.homedir();
-const hostname = os.hostname()
-const port = 8008;
-
-// read file extensions
-var file_extensions = JSON.parse(fs.readFileSync("file_extensions.json"));
+const hostname = os.hostname();
+const port = 8080;
 
 // send index.html
 app.get("/", function (req, res) {
@@ -26,41 +23,38 @@ app.get("/", function (req, res) {
 
 // listen
 server.listen(port, () => {
-  console.log(`PORT: ${port}`);
+  console.log(`Port ${port} from ${__dirname}`);
 });
 
 io.on("connection", (socket) => {
-  // connectoin
   console.log(`(${socket.id}) connected`);
-  socket.emit('hostname', hostname)
-
-  //  disconnect
+  socket.emit("info", { hostname: hostname, homedir: homedir });
   socket.on("disconnect", () => {
     console.log(`(${socket.id}) disconnected`);
   });
 
   socket.on("get_folder", (requested_path) => {
     //
-    console.log("user requested folder: " + requested_path);
+    console.log(`(${socket.id}) requested [${path.join(homedir, requested_path)}]`);
     requested_path = requested_path.replaceAll(homedir, "");
 
     try {
       // array of file names
-      files = fs.readdirSync(path.join(homedir, requested_path));
+      let files = fs.readdirSync(path.join(homedir, requested_path));
 
-      fileobjects = [];
+      let fileobjects = [];
 
       // for each file
       files.forEach((file) => {
-        filepath = path.join(homedir, requested_path, file);
-        console.log(path.extname(filepath).replace(".", ""));
+        let filepath = path.join(requested_path, file);
 
-        let stats = fs.statSync(filepath);
+        let stats = fs.statSync(path.join(homedir, filepath));
+        let ext = path.extname(filepath).toLowerCase();
 
-        let fileobj = {
+        fileobjects.push({
           name: path.basename(filepath),
           path: path.dirname(filepath),
-          extension: path.extname(filepath).replace(".", ""),
+          extension: ext,
           atime: stats.atime,
           mtime: stats.mtime,
           ctime: stats.ctime,
@@ -68,33 +62,25 @@ io.on("connection", (socket) => {
           // size in bytes
           size: stats.size,
           // folder or file
-          type: stats.isDirectory() ? "folder" : stats.isFile() ? "file" : "other",
-          // HOW TO PREVIEW/SHOW THE FILE: folder, audio, video, image, text, none
-          view_type: stats.isDirectory()
+          type: stats.isDirectory()
             ? "folder"
-            : Object.keys(file_extensions).includes(path.extname(filepath).replace(".", ""))
-            ? file_extensions[path.extname(filepath).replace(".", "")].view_type
-            : "none",
-          // ICON TO USE
-          icon: stats.isDirectory()
-            ? "folder.svg"
-            : Object.keys(file_extensions).includes(path.extname(filepath).replace(".", ""))
-            ? file_extensions[path.extname(filepath).replace(".", "")].icon
-            : "file.svg",
-        };
-
-        if(fileobj.view_type == 'text'){
-          fileobj.text = fs.readFileSync(filepath).toString()
-        }
-
-        console.log(fileobj);
-        fileobjects.push(fileobj);
+            : ext == ".mp4" || ext == ".mov" || ext == ".webm"
+            ? "video"
+            : ext == ".png" ||
+              ext == ".jpeg" ||
+              ext == ".jpg" ||
+              ext == ".svg" ||
+              ext == ".gif" ||
+              ext == ".webp" ||
+              ext == ".avif"
+            ? "image"
+            : ext == ".wav" || ext == ".mp3"
+            ? "audio"
+            : "other",
+        });
       });
 
       socket.emit("files", fileobjects);
-      socket.emit("current_path", path.join(homedir, requested_path));
-      console.log(path.join(homedir, requested_path));
-      app.use(express.static(path.join(homedir, requested_path)));
     } catch (err) {
       console.log(err);
       socket.emit("files", "error");
@@ -103,4 +89,5 @@ io.on("connection", (socket) => {
 });
 
 // set public
+app.use(express.static(path.join(__dirname, "../../../")));
 app.use(express.static(path.join(__dirname, "public")));

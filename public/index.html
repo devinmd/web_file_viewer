@@ -15,14 +15,20 @@
 
 	<div id="app">
 		<div id="content">
-			<div id="options">
-				<button onclick="home()">Home</button>
-				<button onclick="back()">Back</button>
-				<button onclick="toggleDotfiles(this)">Show Dotfiles</button>
-			</div>
 			<p id="hostname"></p>
 			<p id="path"></p>
-			<div id="files"></div>
+			<div id="info">
+				<button onclick="back()">Back</button>
+				<p id="filecount"></p>
+				<button onclick="changeView('list')">List</button>
+				<button onclick="changeView('grid')">Grid</button>
+			</div>
+			<p id="loading">Loading...</p>
+			<table id="list">
+			</table>
+			<div id="grid"></div>
+			<button onclick="back()">Back</button>
+
 		</div>
 
 	</div>
