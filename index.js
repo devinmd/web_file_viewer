@@ -89,5 +89,5 @@ io.on("connection", (socket) => {
 });
 
 // set public
-app.use(express.static(path.join(__dirname, "../../../")));
+app.use(express.static(path.join(__dirname, "../../../../")));
 app.use(express.static(path.join(__dirname, "public")));

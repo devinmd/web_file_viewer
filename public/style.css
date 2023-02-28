@@ -10,64 +10,33 @@ html,
   border: none;
   background-repeat: no-repeat;
   outline: none;
+  font-size: 16px;
   font-family: Helvetica;
 }
 
 button {
   border: 1px solid black;
   padding: 2px 4px;
-  font-size: 14px;
 }
 
-#list {
+#table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
-
-#list tr:not(:first-child):hover {
+#table tr:hover {
   outline: 1px solid white;
 }
 
-#list tr td {
+#table tr td {
   white-space: nowrap;
+  padding: 4px 8px;
+
   cursor: default;
 }
 
-#list tr td.icon-container {
-  width: 24px;
-}
-
-#list tr td .icon {
-  height: 16px;
-  width: auto;
-}
-
-#list tr td.btime {
-  color: #8f8f8f;
-  padding-right: 32px;
-}
-
-#list tr th {
+#table tr th {
   text-align: left;
-}
-
-#list tr td.size {
-  color: #8f8f8f;
-  text-align: right;
-  
-}
-
-#content {
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
-  align-items: start;
-}
-#content {
-  padding: 64px;
-}
-#current {
-  font-size: 24px;
 }
 
 button:hover {
@@ -77,15 +46,13 @@ button:hover {
 img,
 video {
   object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 #options {
   display: flex;
   flex-direction: row;
-}
-
-#hostname {
-  font-size: 14px;
 }
 
 #path {
@@ -95,7 +62,6 @@ video {
 
 #info {
   display: flex;
-  font-size: 14px;
   gap: 16px;
   flex-direction: row;
   align-items: center;
@@ -104,6 +70,77 @@ video {
 #loading {
   display: none;
   text-align: center;
-  font-size: 14px;
   width: 100%;
+}
+
+#grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+}
+
+#grid div {
+  width: auto;
+  height: auto;
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid black;
+}
+
+#grid div:hover {
+  border: 1px solid white;
+}
+
+.size,
+.btime,
+.extension {
+  color: #8f8f8f;
+}
+
+#grid div .filename,
+#table tr .filename {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 800px) {
+  #content {
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: start;
+  }
+  .btime,
+  .size,
+  .extension {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  #content {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: start;
+    padding: 64px;
+  }
+  #table tr td.btime {
+    padding-right: 32px;
+  }
+  #table tr td.size {
+    text-align: right;
+  }
+}
+
+#table tr td.icon-container {
+  width: 16px;
+}
+
+#table tr td .icon {
+  height: 16px;
+  width: auto;
 }
